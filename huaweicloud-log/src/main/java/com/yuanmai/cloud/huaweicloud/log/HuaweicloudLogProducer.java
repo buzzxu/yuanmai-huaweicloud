@@ -1,18 +1,16 @@
-package com.yuanmai.cloud;
+package com.yuanmai.cloud.huaweicloud.log;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.huaweicloud.lts.appender.JavaSDKAppender;
 import com.huaweicloud.lts.producer.Callback;
 import com.huaweicloud.lts.producer.Producer;
-import com.huaweicloud.lts.producer.model.log.LogContent;
 import com.huaweicloud.lts.producer.model.log.LogItem;
-import com.huaweicloud.lts.producer.model.log.LogItems;
 import com.yuanmai.components.cloud.log.CloudLogProducer;
 import com.yuanmai.components.cloud.log.objects.Item;
 import com.yuanmai.jackson.Jackson;
 import lombok.extern.slf4j.Slf4j;
-import org.codehaus.janino.JaninoOption;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
@@ -29,16 +27,14 @@ import java.util.Map;
 @Slf4j
 public class HuaweicloudLogProducer implements CloudLogProducer, Closeable {
 
-    @Value("${cloud.huawei.sls.project:null}")
+    @Value("${cloud.huawei.lts.project:null}")
     private String project;
     @Value("${cloud.huawei.access-key-id:null}")
     private String accessKeyId;
     @Value("${cloud.huawei.access-key-secret:null}")
     private String accessKeySecret;
-    @Value("${cloud.huawei.sls.region:cn-east-2}")
+    @Value("${cloud.huawei.lts.region:cn-east-2}")
     private String region;
-    @Value("${cloud.huawei.lts.region:cn-shanghai.log.aliyuncs.com}")
-    private String endpoint;
     @Value("${cloud.huawei.lts.totalSizeInBytes:104857600}")
     private int totalSizeInBytes;
     /**
@@ -115,7 +111,7 @@ public class HuaweicloudLogProducer implements CloudLogProducer, Closeable {
             if(item.getLabels() == null){
                 item.setLabels(Maps.newHashMapWithExpectedSize(1));
             }
-            item.add("source",source);
+            item.getLabels().put("source",source);
         }
         send(group,topic,HuaweicloudLogMapStructs.INSTANCE.to(item), (Callback) callback);
     }
@@ -127,7 +123,7 @@ public class HuaweicloudLogProducer implements CloudLogProducer, Closeable {
                 if(item.getLabels() == null){
                     item.setLabels(Maps.newHashMapWithExpectedSize(1));
                 }
-                item.add("source",source);
+                item.getLabels().put("source",source);
             });
         }
         send(group,topic,HuaweicloudLogMapStructs.INSTANCE.toLogItems(items), (Callback) callback);
@@ -141,7 +137,7 @@ public class HuaweicloudLogProducer implements CloudLogProducer, Closeable {
         }
         LogItem logItem = new LogItem();
         logItem.setLabels(Jackson.object2Json(labels));
-        logItem.setContents(List.of(HuaweicloudLogMapStructs.INSTANCE.toContents(map)));
+        logItem.setContents(Lists.newArrayList(HuaweicloudLogMapStructs.INSTANCE.toContents(map)));
         send(group,topic,logItem, (Callback) callback);
     }
 
@@ -161,7 +157,8 @@ public class HuaweicloudLogProducer implements CloudLogProducer, Closeable {
 
 
     private void send(String logStore, String topic, LogItem logItem, Callback callback){
-        send(logStore,topic,List.of(logItem),callback);
+        List<LogItem> item = Lists.newArrayList(logItem);
+        send(logStore,topic,item,callback);
     }
     private void send(String logStore,String topic,List<LogItem> items,Callback callback){
         try {

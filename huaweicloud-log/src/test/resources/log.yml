@@ -1,13 +1,27 @@
 cloud:
-  aliyun:
-    access-key-id: LTAI5tGCWMr5g5jbRCUby9Zd
-    access-key-secret: NusY1EMjxONO7yYKZbPuM52RKQ2hLR
-    sls:
-      project: xwjd-test
+  huawei:
+    access-key-id: O9ABWDAMMSMNHRQZEVCJ
+    access-key-secret: YWaPFiEVhCjChEJfEnxD6C4GvzmXCNgiQzsmMQCb
+    lts:
+      project: 0b26d4255e0010802f53c010055a7465
+      region: cn-east-2
+      test: true
+      groups:
+        haibao: 3e844277-9006-455a-8d04-fc4c22727305
+      streams:
+        keywords: 63c8d194-f354-47f1-b214-3350a19a7c6b
+
+
 
 redis:
-  url: 127.0.0.1:6379
-  password:
+  url: 59.110.7.76:6600 #127.0.0.1:6379
+  password:  MNBV7QCvX9YX&UK8xu #MNBV7QCvX9YX&UK8
+  database: 8
+  pool:
+    min-idle: 500
+    max-idle: 2000
+    max-total: 2000
+    max-wait: 5000
 
 
 db:

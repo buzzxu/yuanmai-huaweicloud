@@ -1,4 +1,4 @@
-package com.yuanmai.cloud;
+package com.yuanmai.cloud.huaweicloud.log;
 
 import com.huaweicloud.lts.producer.model.log.LogContent;
 import com.huaweicloud.lts.producer.model.log.LogItem;
@@ -8,7 +8,6 @@ import com.yuanmai.jackson.Jackson;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +26,7 @@ public interface HuaweicloudLogMapStructs {
 
     default LogItem to(Item obj){
         LogItem logItem = new LogItem();
-        logItem.setLabels(obj.getLabels() != null ? Jackson.object2Json(obj) : "{}");
+        logItem.setLabels(obj.getLabels() != null ? Jackson.object2Json(obj.getLabels()) : "{}");
         logItem.setContents(toContents(obj.getContents()));
         return  logItem;
     }

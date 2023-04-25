@@ -1,4 +1,4 @@
-package com.yuanmai.cloud.aliyun.log;
+package com.yuanmai.cloud.huaweicloud.log;
 
 import com.yuanmai.annotation.Yuanmai;
 import com.yuanmai.test.SpringInitializer;
