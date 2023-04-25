@@ -1,0 +1,27 @@
+cloud:
+  aliyun:
+    access-key-id: LTAI5tGCWMr5g5jbRCUby9Zd
+    access-key-secret: NusY1EMjxONO7yYKZbPuM52RKQ2hLR
+    sls:
+      project: xwjd-test
+
+redis:
+  url: 127.0.0.1:6379
+  password:
+
+
+db:
+  logger:
+    enabled: true
+  connection:
+    url: jdbc:mysql://59.110.7.76:15241/ironman-dev?characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true&failOverReadOnly=false&useSSL=false
+    username: devel
+    password: JPHdfRRWhVq>v8U4Q
+    initSql: set names utf8mb4
+  hikari:
+    testQuery: SELECT 1
+    maximum-pool-size: 60
+    connection-timeout: 10000
+    minimum-idle: 10
+    idle-timeout: 30000
+    max-lifetime: 600000
