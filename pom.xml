@@ -21,6 +21,7 @@
         <rversion>23.0</rversion>
         <lts-sdk-common.version>1.0.1</lts-sdk-common.version>
         <lts-sdk-java.version>1.0.1</lts-sdk-java.version>
+        <huawei-lts-sk.version>3.1.37</huawei-lts-sk.version>
         <junit.version>5.9.2</junit.version>
         <lombok.version>1.18.26</lombok.version>
         <mapstruct.version>1.5.4.Final</mapstruct.version>
@@ -34,6 +35,11 @@
                 <version>${yuanmai-compoenents.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.huaweicloud.sdk</groupId>
+                <artifactId>huaweicloud-sdk-lts</artifactId>
+                <version>${huawei-lts-sk.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.huaweicloud</groupId>
@@ -79,6 +85,11 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
