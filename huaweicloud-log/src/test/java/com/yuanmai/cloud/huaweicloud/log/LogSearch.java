@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -37,7 +38,8 @@ public class LogSearch {
 
     @Test
     public void search1(){
-        List<Item> items = cloudLogService.query("e0a38102-b1f7-4e85-b7f6-a82dd3123b74","",1682294400000L,1682674820974L,"SELECT keywords ,count(1) as number group by keywords");
+        LocalDateTime now = LocalDateTime.now();
+        List<Item> items = cloudLogService.query("e0a38102-b1f7-4e85-b7f6-a82dd3123b74","",now.plusDays(-30),now,"SELECT keywords ,count(1) as number group by keywords");
         items.forEach(v->log.info(v.json()));
     }
 }

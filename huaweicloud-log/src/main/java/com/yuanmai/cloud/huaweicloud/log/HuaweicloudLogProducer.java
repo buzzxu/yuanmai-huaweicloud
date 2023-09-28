@@ -137,7 +137,7 @@ public class HuaweicloudLogProducer implements CloudLogProducer, Closeable {
         }
         LogItem logItem = new LogItem();
         logItem.setLabels(Jackson.object2Json(labels));
-        logItem.setContents(Lists.newArrayList(HuaweicloudLogMapStructs.INSTANCE.toContents(map)));
+        logItem.setContents(Lists.newArrayList(HuaweicloudLogMapStructs.INSTANCE.toContent(map)));
         send(group,topic,logItem, (Callback) callback);
     }
 
@@ -156,15 +156,15 @@ public class HuaweicloudLogProducer implements CloudLogProducer, Closeable {
 
 
 
-    private void send(String logStore, String topic, LogItem logItem, Callback callback){
+    private void send(String group, String topic, LogItem logItem, Callback callback){
         List<LogItem> item = Lists.newArrayList(logItem);
-        send(logStore,topic,item,callback);
+        send(group,topic,item,callback);
     }
-    private void send(String logStore,String topic,List<LogItem> items,Callback callback){
+    private void send(String group,String stream,List<LogItem> items,Callback callback){
         try {
-            producer.send(logStore,topic, items,callback);
+            producer.send(group,stream, items,callback);
         }catch (Exception ex){
-            log.error("Failed to send log, project={}, logStore={},topic={}",project,logStore,topic, ex);
+            log.error("Failed to send log, project={}, groupId={},streamId={}",project,group,stream, ex);
         }
     }
 

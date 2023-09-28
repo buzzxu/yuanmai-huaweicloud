@@ -1,6 +1,7 @@
 package com.yuanmai.cloud.huaweicloud.log;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.huaweicloud.lts.producer.model.log.LogContent;
 import com.huaweicloud.lts.producer.model.log.LogItem;
 import com.yuanmai.components.cloud.log.objects.Content;
@@ -30,22 +31,31 @@ public interface HuaweicloudLogMapStructs {
     default LogItem to(Item obj){
         LogItem logItem = new LogItem();
         logItem.setLabels(obj.getLabels() != null ? Jackson.object2Json(obj.getLabels()) : "{}");
-        logItem.setContents(toContents(obj.getContents()));
+//        logItem.setContents(toContents(obj.getContents()));
+        logItem.setContents(Lists.newArrayList(toContent(obj.getContents())));
         return  logItem;
     }
 
-    default LogContent toContents(Map<String,String> map){
+    default LogContent toContent(Map<String,String> map){
         return new LogContent(System.currentTimeMillis() * 1000000L + System.nanoTime() % 1000000L, Jackson.object2Json(map));
     }
     List<LogItem> toLogItems(List<Item> items);
 
     List<LogContent> toContents(List<Content> list);
+
+    default LogContent toContent(List<Content> list){
+        Map<String,String> hash = Maps.newHashMapWithExpectedSize(list.size());
+        for(Content content : list){
+            hash.put(content.getKey(),content.getValue());
+        }
+        return new LogContent(System.currentTimeMillis() * 1000000L + System.nanoTime() % 1000000L, Jackson.object2Json(hash));
+    }
     default LogContent to(Content obj){
         return new LogContent(System.currentTimeMillis() * 1000000L + System.nanoTime() % 1000000L,Jackson.object2Json(Map.of(obj.getKey(),obj.getValue())));
     }
 
     default List<LogContent> maps2List(List<Map<String,String>> datas){
-        return datas.stream().map(this::toContents).toList();
+        return datas.stream().map(this::toContent).toList();
     }
 
 
