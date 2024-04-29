@@ -42,20 +42,20 @@ public class HuaweiLtsClient implements CloudLogService {
 
     @Override
     public List<Item> query(String group, String topic, LocalDateTime from, LocalDateTime to, String query) {
-        return this.query(group, topic, from.toInstant(ZoneOffset.UTC).toEpochMilli(), to.toInstant(ZoneOffset.UTC).toEpochMilli(), query);
+        return this.query(group, topic, from.toInstant(ZoneOffset.UTC).toEpochMilli(),  to.toInstant(ZoneOffset.UTC).toEpochMilli(), query);
     }
 
     @Override
-    public List<Item> query(String group, String topic, LocalDateTime from, LocalDateTime to, String query, long limit, long offset, boolean reverse, boolean powerSql) {
+    public List<Item> query(String group, String topic, LocalDateTime from, LocalDateTime to, String query, int limit, int offset, boolean reverse, boolean powerSql) {
         return query(group,topic,from,to,query);
     }
 
     @Override
-    public List<Item> query(String group, String topic, Long from,Long to,String query) {
+    public List<Item> query(String group, String topic, long from,long to,String query) {
         return getLogs(group,from,to,query);
     }
 
-    private List<Item> getLogs(String logStore, Long from, Long to, String query){
+    private List<Item> getLogs(String logStore, long from, long to, String query){
         try {
             ListStructuredLogsWithTimeRangeRequest request = new ListStructuredLogsWithTimeRangeRequest();
             request.setLogStreamId(logStore);
