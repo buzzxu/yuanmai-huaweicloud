@@ -6,7 +6,7 @@
         <server>
             <id>yuanmai</id>
             <username>5ec3a40e2430b0ce44e8ef73</username>
-            <password>${password}</password>
+            <password>${password}}</password>
         </server>
     </servers>
 </settings>
