@@ -1,0 +1,23 @@
+name: Publish snapshot to Nexus
+
+on:
+  push:
+    branches: [ snapshot ]
+
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+        with:
+          ref: 'snapshot'
+
+      - name: Install Java and Maven
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Build and Deploy with Maven
+        run: mvn deploy  -Dpassword=${{ secrets.password }} --file pom.xml -s settings.xml
