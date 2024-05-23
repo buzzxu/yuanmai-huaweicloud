@@ -64,15 +64,15 @@ public class HuaweiLtsClient implements CloudLogService {
                     .withQuery(query)
                     .withFormat("k-v")
                     .withTimeRange(new TimeRange().withSqlTimeZone("UTC")
-                            .withStartTime(String.valueOf(from))
-                            .withEndTime(String.valueOf(to))
+                            .withStartTime(from)
+                            .withEndTime(to)
                             .withStartTimeGt(true)
                             .withEndTimeLt(true)));
             ListStructuredLogsWithTimeRangeResponse response = client.listStructuredLogsWithTimeRange(request);
             if(response.getHttpStatusCode() == 200){
-                Map<String, List<Object>> body ;
-                if((body = response.getBody()) != null){
-                   return HuaweicloudLogMapStructs.INSTANCE.toItem(body);
+                Object body ;
+                if((body = response.getBody()) != null && body instanceof Map){
+                   return HuaweicloudLogMapStructs.INSTANCE.toItem((Map<String, List<Object>>) body);
                 }
             }
             return Collections.emptyList();
