@@ -6,7 +6,7 @@
 
     <groupId>com.yuanmai.cloud</groupId>
     <artifactId>yuanmai-huaweicloud</artifactId>
-    <version>23.0</version>
+    <version>24.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>huaweicloud-log</module>
@@ -17,8 +17,8 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <yuanmai-compoenents.version>23.0</yuanmai-compoenents.version>
-        <rversion>23.0</rversion>
+        <yuanmai-compoenents.version>24.0-SNAPSHOT</yuanmai-compoenents.version>
+        <rversion>24.0-SNAPSHOT</rversion>
         <lts-sdk-common.version>1.0.2</lts-sdk-common.version>
         <lts-sdk-java.version>1.0.2.1</lts-sdk-java.version>
         <huawei-lts-sk.version>3.1.96</huawei-lts-sk.version>
