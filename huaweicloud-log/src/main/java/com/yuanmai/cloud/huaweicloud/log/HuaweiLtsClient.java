@@ -70,9 +70,9 @@ public class HuaweiLtsClient implements CloudLogService {
                             .withEndTimeLt(true)));
             ListStructuredLogsWithTimeRangeResponse response = client.listStructuredLogsWithTimeRange(request);
             if(response.getHttpStatusCode() == 200){
-                Object body ;
+               Object body ;
                 if((body = response.getBody()) != null && body instanceof Map){
-                   return HuaweicloudLogMapStructs.INSTANCE.toItem((Map<String, List<Object>>) body);
+                   return HuaweicloudLogMapStructs.INSTANCE.toItem((Map<String, List<Object>>)body);
                 }
             }
             return Collections.emptyList();
