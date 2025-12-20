@@ -104,20 +104,20 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <repository>
+        <!--<repository>
             <id>yuanmai</id>
             <url>https://packages.aliyun.com/maven/repository/2003547-release-AmXxfp</url>
         </repository>
         <snapshotRepository>
             <id>yuanmai</id>
             <url>https://packages.aliyun.com/maven/repository/2003547-snapshot-xxdKnz</url>
-        </snapshotRepository>
-        <!--<repository>
-            &lt;!&ndash; 须与 settings.xml 中 server 的 id 一致 &ndash;&gt;
+        </snapshotRepository>-->
+        <repository>
+            <!-- 须与 settings.xml 中 server 的 id 一致 -->
             <id>fucksky-yuanmai-repo</id>
             <name>fucksky-yuanmai-repo</name>
             <url>https://maven.cnb.cool/fucksky/yuanmai-repo/-/packages/</url>
-        </repository>-->
+        </repository>
     </distributionManagement>
 
     <profiles>
