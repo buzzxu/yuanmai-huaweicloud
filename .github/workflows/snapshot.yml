@@ -2,7 +2,7 @@ name: Publish snapshot to Nexus
 
 on:
   push:
-    branches: [ release/24.0 ]
+    branches: [ release/24.1 ]
 
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v4
         with:
-          ref: 'release/24.0'
+          ref: 'release/24.1'
 
       - name: Install Java and Maven
         uses: actions/setup-java@v4

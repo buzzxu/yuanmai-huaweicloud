@@ -8,5 +8,26 @@
             <username>5ec3a40e2430b0ce44e8ef73</username>
             <password>${password}</password>
         </server>
+        <server>
+            <id>fucksky-yuanmai-repo</id>
+            <username>cnb</username>
+            <!-- 请替换为您的访问令牌 -->
+            <password>${CNB_TOKEN}</password>
+        </server>
     </servers>
+    <profiles>
+        <profile>
+            <id>fucksky-yuanmai-repo-profile</id>
+            <repositories>
+                <repository>
+                    <!-- 须与 server 的 id 一致 -->
+                    <id>fucksky-yuanmai-repo</id>
+                    <url>https://maven.cnb.cool/fucksky/yuanmai-repo/-/packages/</url>
+                </repository>
+            </repositories>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 </settings>
