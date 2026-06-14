@@ -15,7 +15,7 @@ import com.yuanmai.components.cloud.log.objects.Item;
 import com.yuanmai.util.Dates;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
