@@ -105,14 +105,6 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <!--<repository>
-            <id>yuanmai</id>
-            <url>https://packages.aliyun.com/maven/repository/2003547-release-AmXxfp</url>
-        </repository>
-        <snapshotRepository>
-            <id>yuanmai</id>
-            <url>https://packages.aliyun.com/maven/repository/2003547-snapshot-xxdKnz</url>
-        </snapshotRepository>-->
         <repository>
             <!-- 须与 settings.xml 中 server 的 id 一致 -->
             <id>fucksky-yuanmai-repo</id>
@@ -144,6 +136,30 @@
                     </releases>
                 </repository>
             </repositories>
+        </profile>
+        <!--
+            阿里云 packages。Maven 的 distributionManagement 只允许一个 repository 和一个
+            snapshotRepository，没法像 Gradle 那样并列两个仓，所以阿里云单独放这个 profile 里，
+            发布时跑两遍：mvn deploy 发 CNB，mvn deploy -Daliyun 发阿里云。
+            用属性激活而不是 -Paliyun，是因为 -P 会让 activeByDefault 的 profile 失效。
+        -->
+        <profile>
+            <id>aliyun</id>
+            <activation>
+                <property>
+                    <name>aliyun</name>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>yuanmai</id>
+                    <url>https://packages.aliyun.com/maven/repository/2003547-release-AmXxfp</url>
+                </repository>
+                <snapshotRepository>
+                    <id>yuanmai</id>
+                    <url>https://packages.aliyun.com/maven/repository/2003547-snapshot-xxdKnz</url>
+                </snapshotRepository>
+            </distributionManagement>
         </profile>
     </profiles>
     <build>
